@@ -14,17 +14,17 @@
         dest: "{{ list_path }}"
 
     - name: Update (2/11)
-      apt_rpm:
+      community.general.apt_rpm:
         update_cache: true
         dist_upgrade: true
 
     - name: Update (3/11)
-      apt_rpm:
+      community.general.apt_rpm:
         update_cache: true
         dist_upgrade: true
 
     - name: Remove python3.9 from ALT 10 SP (4/11)
-      apt_rpm:
+      community.general.apt_rpm:
         pkg: python3
         state: absent
 
@@ -34,11 +34,11 @@
         dest: "{{ list_path }}"
 
     - name: Update (6/11)
-      apt_rpm:
+      community.general.apt_rpm:
         update_cache: true
 
     - name: Install python3.7 (7/11)      
-      apt_rpm:
+      community.general.apt_rpm:
         pkg: python3
         state: present
     
@@ -52,7 +52,7 @@
         dest: "{{ list_path }}"
 
     - name: Install eraraid pkg	(10/11)
-      apt_rpm:
+      community.general.apt_rpm:
         update_cache: true
         pkg:
           - eraraid-release
