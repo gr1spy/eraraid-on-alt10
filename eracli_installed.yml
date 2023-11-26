@@ -1,6 +1,6 @@
 ---
 - name: Install Eraraid on Alt 10 SP
-  hosts: servers
+  hosts: 192.168.184.32
   remote_user: root
   gather_facts: no
   
