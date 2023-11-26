@@ -1,0 +1,75 @@
+---
+- name: Install Eraraid on Alt 10 SP
+  hosts: servers
+  remote_user: root
+  gather_facts: no
+  
+  vars:
+    list_path: /etc/apt/sources.list.d
+
+  tasks:
+    - name: Prepare sources.lists (1/11)
+      copy:
+        src: sources.list.d_0/
+        dest: "{{ list_path }}"
+
+    - name: Update (2/11)
+      apt_rpm:
+        update_cache: true
+        dist_upgrade: true
+
+    - name: Update (3/11)
+      apt_rpm:
+        update_cache: true
+        dist_upgrade: true
+
+    - name: Remove python3.9 from ALT 10 SP (4/11)
+      apt_rpm:
+        pkg: python3
+        state: absent
+
+    - name: Copy eracli repo file to source.list dir (5/11)
+      copy:
+        src: sources.list.d_1/
+        dest: "{{ list_path }}"
+
+    - name: Update (6/11)
+      apt_rpm:
+        update_cache: true
+
+    - name: Install python3.7 (7/11)      
+      apt_rpm:
+        pkg: python3
+        state: present
+    
+    - name: Install nvme-cli (8/11)
+      ansible.builtin.shell:
+        cmd: apt-get install nvme-cli -y
+
+    - name: Update sources.lists (9/11)
+      copy:
+        src: sources.list.d_2/
+        dest: "{{ list_path }}"
+
+    - name: Install eraraid pkg	(10/11)
+      apt_rpm:
+        update_cache: true
+        pkg:
+          - eraraid-release
+    
+    - name: Reboot after install (11/11)
+      ansible.builtin.reboot:
+    
+    - name: check if eracli is installed
+      shell: lsmod | grep era
+      register: era_installed
+      ignore_errors: True
+      check_mode: False
+      changed_when: False
+
+    - name: print
+      debug:
+        msg: "eracli is installed"
+      when: era_installed.rc == 0 
+
+...
