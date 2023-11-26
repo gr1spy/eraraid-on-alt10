@@ -1,0 +1,7 @@
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux c10f/branch/x86_64 classic gostcrypto
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux c10f/branch/x86_64-i586 classic
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux c10f/branch/noarch classic
+
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux CF2/branch/x86_64 classic
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux CF2/branch/x86_64-i586 classic
+rpm [cert8] http://update.altsp.su/pub/distributions/ALTLinux CF2/branch/noarch classic
